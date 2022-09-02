@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { Box, Spinner, Text, VStack } from "@chakra-ui/react";
+import CountryCard from "./component/CountryCard";
+import CountrySerach from "./component/CountrySerach";
+import axios from "axios";
+// import { useFetcher } from "./component/useFetcher";
+import { useState, useEffect } from "react";
 
 function App() {
+  // const {data, error, isLoading} = useFetcher();
+  const [data, setData] = useState(null);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const url = 'https://restcountries.com/v3.1/name';
+  const getData = async (name) => {
+    try{
+      const res = await axios.get(`${url}/${name}`);
+      setData(res?.data);
+      setIsLoading(false);
+    } catch (error) {
+      setError(error?.res && 'Data Not Found');
+      setIsLoading(false);
+    }
+  }
+
+  
+  useEffect(() => {
+    getData('peru')
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box p={5}>
+      <CountrySerach getData={getData} />
+      { isLoading? (<VStack> <Spinner color={'red'} /> <Text fontSize={20} textColor={'red'} textAlign={'center'}> Data Loading</Text> </VStack>)
+      : error ? ( error && <Text>Data Not Found</Text>)
+      : <CountryCard data={data} />
+      }
+    </Box>
   );
 }
 
