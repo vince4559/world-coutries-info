@@ -7,7 +7,7 @@ const CountryCard = ({data}) => {
     <VStack p={5} spacing='3' bg={'gray.100'} border={'2px solid green'} m={5} borderRadius={'3xl'} >
       {Object.values(data)?.map(country => (
         <VStack key={country.area}>
-          <Heading color={'blue.700'}>{country?.name?.official}</Heading>
+          <Heading color={'blue.700'} textAlign={'center'}>{country?.name?.official}</Heading>
 
           <Text fontSize={18} fontWeight={'semibold'}>{country?.flag}</Text>
           

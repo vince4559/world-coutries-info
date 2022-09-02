@@ -10,14 +10,18 @@ const CountrySerach = ({getData}) => {
   return(
     <VStack p={6}>
       <Heading bgGradient={'radial(yellow, blue, green)'}
+        textAlign={'center'}
+        size={['md', 'xl', '3xl']}
         bgClip={'text'}  >
         WORLD COUNTRY'S INFORMATION
       </Heading>
-      <Text fontFamily={'sans-serif'} fontWeight={'bold'} fontSize={20}
-      textShadow={'1px 1px gray'} lineHeight={2}>
-        Know Vital Information About Your Favorite Country Around The World
+      <Text fontFamily={'sans-serif'} textAlign={'center'}  
+        fontWeight={'bold'} 
+        textShadow={'1px 1px gray'} 
+        fontSize={['12px', 'lg','xl' ]} >
+         Key Information About Your Favorite Countries Around The World
         </Text>
-      <InputGroup w={'70%'}>
+      <InputGroup w={['100%', '80%' ]}>
         <Input type={'text'} 
           value={search}
           onChange={e => setSearch(e.target.value)}
